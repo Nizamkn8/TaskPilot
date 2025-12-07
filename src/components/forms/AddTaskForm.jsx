@@ -2,9 +2,11 @@ import React, { useState } from 'react'
 
 const AddTaskForm = ({ onAdd }) => {
   const [title,setTitle] = useState("");
+  console.log(title);
+
 
   const handleSubmit = (e) => {
-    e.prventDefault();
+    e.preventDefault();
     if(title.trim()) {
       onAdd(title.trim())
       setTitle(""); // Clear the input after submission

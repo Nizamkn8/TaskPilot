@@ -23,9 +23,10 @@ const taskSlice = createSlice({
     toggleComplete: (state,action) => {
       const task = state.tasks.find(state => state.id == action.payload);
       if(task) {
-        task.isCompleted == !task.isCompleted
+        task.isCompleted = !task.isCompleted
       }
-    }
+    },
+
   }
 })
 
