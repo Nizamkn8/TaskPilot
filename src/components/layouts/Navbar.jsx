@@ -16,7 +16,7 @@ const  Navbar = () => {
         <input className="h-[45px] w-full bg-white text-black px-4 py-2 rounded-lg focus:outline-0" type="text" />
         <div>
           <FaBell className="text-xl text-white hover:text-blue-500" />
-          <button onClick={handleLogout}>Logout</button>
+          <button onClick={handleLogout} className="text-white cursor-pointer">Logout</button>
         </div>
       </div>
     </header>
