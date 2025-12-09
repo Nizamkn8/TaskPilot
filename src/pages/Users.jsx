@@ -2,33 +2,9 @@ import React, { useState } from "react";
 import UserModal from "../components/common/UserModal";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser, clearSelectedUser, loadMoreUsers, selectUser, updateUser } from "../redux/features/users/usersSlice";
+import Search from "../features/search/Search";
 
 const Users = () => {
-  // const [isModalOpen, setIsModalOpen] = useState(false);
-  // const [users, setUsers] = useState([]);
-  // const [selectedUser, setSelectedUser] = useState(null);
-  // const [usersVisbileCount, setUsersVisibleCount] = useState(5);
-
-  // const handleAddUser = (user) => {
-    //
-    // setUsers((prev) => [...prev, { id: Date.now(), ...user }]);
-    // setIsModalOpen(false);
-    // setSelectedUser(null);
-  // };
-
-  // const updateUser = (updatedUser) => {
-  //   setUsers((prev) =>
-  //     prev.map((user) => (user.id === updatedUser.id ? updatedUser : user))
-  //   );
-  //   setIsModalOpen(false);
-  //   setSelectedUser(null);
-  // };
-
-  // const editUser = (user) => {
-  //   setSelectedUser(user); // store user for editing
-  //   setIsModalOpen(true); // open modal
-  // };
-
   // using redux implementation
   const dispatch = useDispatch();
 
@@ -36,6 +12,7 @@ const Users = () => {
   const selectedUser = useSelector(state => state.users.selectedUser);
   const visibleCount = useSelector(state => state.users.visibleCount)
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [searchTerm,setSearchTerm] = useState("");
 
   const handleAdd = (user) => {
     //redux
@@ -49,6 +26,11 @@ const Users = () => {
     setIsModalOpen(false);
     dispatch(clearSelectedUser());
   }
+
+  //filter the user from recieved search query from Searc.jsx component
+  const filteredUsers = users.filter((user) =>
+    user.name.toLowerCase().includes(searchTerm.toLowerCase())
+  )
 
   return (
     <div className="py-[80px] px-[40px] w-full">
@@ -67,6 +49,8 @@ const Users = () => {
           </button>
         </div>
 
+        <Search onSearch={(value) => setSearchTerm((value))}/>
+
         <table className="border-collapse border-2 w-full">
           <thead>
             <tr>
@@ -78,7 +62,7 @@ const Users = () => {
           </thead>
 
           <tbody>
-            {users.slice(0, visibleCount).map((user) => (
+            {filteredUsers.slice(0, visibleCount).map((user) => (
               <tr key={user.id}>
                 <td className="border-1 p-2">{user.name}</td>
                 <td className="border-1 p-2">{user.email}</td>

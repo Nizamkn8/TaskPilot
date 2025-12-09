@@ -10,8 +10,6 @@ const Dashboard = () => {
   const tasksPending = tasks.filter(task =>  !task.isCompleted).length
   const completionRate = Math.floor((tasksCompleted / totlaTasks) * 100)
 
-  console.log(totlaTasks,tasksCompleted,tasksPending,completionRate)
-
   return (
     <div>
       <div className="mb-5 flex gap-3">

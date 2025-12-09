@@ -211,5 +211,5 @@ Shows clean engineering.
 
 progress till now
 -----------------
-this is my project planning in this i have done adding,toggling,delting todo lists,implemented routing,todo operations using redux,used persist in redux to retain data when refresh,added copleted tasks,pending tasks,percentage of completed tasks pomodoro counter,total tasks these display in dashboard, implemented user crud functionality username,emal and user role its done using a modal and added pagination load more for users when user exceeds more than 5 and implemented it using redux now with persist
+this is my project planning in this i have done adding,toggling,delting todo lists,implemented routing,todo operations using redux,used persist in redux to retain data when refresh,added copleted tasks,pending tasks,percentage of completed tasks pomodoro counter,total tasks these display in dashboard, implemented user crud functionality username,emal and user role its done using a modal and added pagination load more for users when user exceeds more than 5 and implemented it using redux now with persist, created debouncee search in users and tasks listing page with reusable custom Hook logic
  -->
