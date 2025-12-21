@@ -17,7 +17,6 @@ const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Save user to localStorage
     saveUser(form);
 
     alert("Registration successful!");
@@ -25,40 +24,87 @@ const Register = () => {
   };
 
   return (
-    <div className="p-6 max-w-sm mx-auto">
-      <h2 className="text-2xl mb-4">Register</h2>
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+      {/* Card */}
+      <div className="w-full max-w-md rounded-2xl bg-white p-8 shadow-lg">
 
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+        {/* Header */}
+        <div className="mb-6 text-center">
+          <h2 className="text-3xl font-bold text-gray-800">
+            Create Account
+          </h2>
+          <p className="mt-1 text-sm text-gray-500">
+            Sign up to get started with TaskPilot
+          </p>
+        </div>
 
-        <input
-          name="name"
-          type="text"
-          placeholder="Name"
-          className="border p-2"
-          onChange={handleChange}
-        />
+        {/* Form */}
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label className="mb-1 block text-sm font-medium text-gray-600">
+              Full Name
+            </label>
+            <input
+              name="name"
+              type="text"
+              placeholder="John Doe"
+              value={form.name}
+              onChange={handleChange}
+              className="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm
+                         focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            />
+          </div>
 
-        <input
-          name="email"
-          type="email"
-          placeholder="Email"
-          className="border p-2"
-          onChange={handleChange}
-        />
+          <div>
+            <label className="mb-1 block text-sm font-medium text-gray-600">
+              Email
+            </label>
+            <input
+              name="email"
+              type="email"
+              placeholder="you@example.com"
+              value={form.email}
+              onChange={handleChange}
+              className="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm
+                         focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            />
+          </div>
 
-        <input
-          name="password"
-          type="password"
-          placeholder="Password"
-          className="border p-2"
-          onChange={handleChange}
-        />
+          <div>
+            <label className="mb-1 block text-sm font-medium text-gray-600">
+              Password
+            </label>
+            <input
+              name="password"
+              type="password"
+              placeholder="••••••••"
+              value={form.password}
+              onChange={handleChange}
+              className="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm
+                         focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            />
+          </div>
 
-        <button className="bg-blue-600 px-4 py-2 text-white">
-          Register
-        </button>
+          <button
+            type="submit"
+            className="w-full rounded-lg bg-blue-600 py-2.5 text-sm font-medium
+                       text-white hover:bg-blue-700 transition"
+          >
+            Register
+          </button>
+        </form>
 
-      </form>
+        {/* Footer */}
+        <div className="mt-6 text-center text-sm text-gray-500">
+          Already have an account?{" "}
+          <span
+            onClick={() => navigate("/login")}
+            className="cursor-pointer font-medium text-blue-600 hover:underline"
+          >
+            Login
+          </span>
+        </div>
+      </div>
     </div>
   );
 };

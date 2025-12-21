@@ -27,7 +27,7 @@ export function isLoggedIn() {
 }
 
 // Logout
-export function logoutUser() {
+export function logoutUser() {  
   localStorage.removeItem("isLoggedIn");
   localStorage.removeItem("currentUser");
 }

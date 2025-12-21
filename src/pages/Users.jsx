@@ -1,47 +1,55 @@
 import React, { useState } from "react";
-import UserModal from "../components/common/UserModal";
+import UserModal from "../components/common/UserModal/UserModal";
 import { useDispatch, useSelector } from "react-redux";
-import { addUser, clearSelectedUser, loadMoreUsers, selectUser, updateUser } from "../redux/features/users/usersSlice";
+import {
+  addUser,
+  clearSelectedUser,
+  loadMoreUsers,
+  selectUser,
+  updateUser,
+} from "../redux/features/users/usersSlice";
 import Search from "../features/search/Search";
 
 const Users = () => {
-  // using redux implementation
   const dispatch = useDispatch();
 
-  const users = useSelector(state => state.users.list);
-  const selectedUser = useSelector(state => state.users.selectedUser);
-  const visibleCount = useSelector(state => state.users.visibleCount)
+  const users = useSelector((state) => state.users.list);
+  const selectedUser = useSelector((state) => state.users.selectedUser);
+  const visibleCount = useSelector((state) => state.users.visibleCount);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [searchTerm,setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
 
   const handleAdd = (user) => {
-    //redux
-    dispatch(addUser(user))
+    dispatch(addUser(user));
     setIsModalOpen(false);
-    dispatch(clearSelectedUser())
+    dispatch(clearSelectedUser());
   };
 
   const handleUpdate = (user) => {
     dispatch(updateUser(user));
     setIsModalOpen(false);
     dispatch(clearSelectedUser());
-  }
+  };
 
-  //filter the user from recieved search query from Searc.jsx component
   const filteredUsers = users.filter((user) =>
     user.name.toLowerCase().includes(searchTerm.toLowerCase())
-  )
+  );
 
   return (
-    <div className="py-[80px] px-[40px] w-full">
-      <div className="max-w-[500px] w-full">
-        <div className="flex justify-between mb-4">
-          <h1>User Management</h1>
+    <div className="py-[80px] px-[40px] w-full bg-gray-50 min-h-screen">
+      <div className="max-w-5xl mx-auto bg-white rounded-2xl shadow-sm p-6">
+
+        {/* Header */}
+        <div className="flex items-center justify-between mb-6">
+          <h1 className="text-2xl font-bold text-gray-800">
+            User Management
+          </h1>
 
           <button
-            className="bg-blue-600 text-white px-4 py-2 rounded"
+            className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 transition"
             onClick={() => {
-              dispatch(clearSelectedUser()) // Add mode
+              dispatch(clearSelectedUser());
               setIsModalOpen(true);
             }}
           >
@@ -49,56 +57,84 @@ const Users = () => {
           </button>
         </div>
 
-        <Search onSearch={(value) => setSearchTerm((value))}/>
+        {/* Search */}
+        <div className="mb-4">
+          <Search onSearch={(value) => setSearchTerm(value)} />
+        </div>
 
-        <table className="border-collapse border-2 w-full">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Role</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {filteredUsers.slice(0, visibleCount).map((user) => (
-              <tr key={user.id}>
-                <td className="border-1 p-2">{user.name}</td>
-                <td className="border-1 p-2">{user.email}</td>
-                <td className="border-1 p-2">{user.role}</td>
-                <td className="border-1 p-2">
-                  <button
-                    className="bg-blue-600 text-white px-4 py-2 rounded"
-                    onClick={() => {
-                    dispatch(selectUser(user))
-                    setIsModalOpen(true)
-                  }}>Edit</button>
-                </td>
-              </tr>
-            ))}
-
-            {users.length > visibleCount && (
+        {/* Table */}
+        <div className="overflow-x-auto">
+          <table className="w-full border border-gray-200 rounded-lg overflow-hidden">
+            <thead className="bg-gray-100">
               <tr>
-                <td colSpan="4" className="text-center py-4">
-                  <button
-                    //onClick={() => setUsersVisibleCount((prev) => prev + 5)}
-                    onClick={() => dispatch(loadMoreUsers())}
-                    className="bg-gray-200 px-4 py-2"
-                  >
-                    Load More
-                  </button>
-                </td>
+                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-600">
+                  Name
+                </th>
+                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-600">
+                  Email
+                </th>
+                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-600">
+                  Role
+                </th>
+                <th className="px-4 py-3 text-center text-sm font-semibold text-gray-600">
+                  Actions
+                </th>
               </tr>
-            )}
-          </tbody>
-        </table>
+            </thead>
 
+            <tbody>
+              {filteredUsers.slice(0, visibleCount).map((user) => (
+                <tr
+                  key={user.id}
+                  className="border-t hover:bg-gray-50 transition"
+                >
+                  <td className="px-4 py-3 text-sm text-gray-800">
+                    {user.name}
+                  </td>
+                  <td className="px-4 py-3 text-sm text-gray-600">
+                    {user.email}
+                  </td>
+                  <td className="px-4 py-3 text-sm">
+                    <span className="inline-block rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-600">
+                      {user.role}
+                    </span>
+                  </td>
+                  <td className="px-4 py-3 text-center">
+                    <button
+                      className="rounded-lg bg-gray-100 px-3 py-1 text-sm font-medium text-gray-700 hover:bg-gray-200 transition"
+                      onClick={() => {
+                        dispatch(selectUser(user));
+                        setIsModalOpen(true);
+                      }}
+                    >
+                      Edit
+                    </button>
+                  </td>
+                </tr>
+              ))}
+
+              {users.length > visibleCount && (
+                <tr>
+                  <td colSpan="4" className="py-4 text-center">
+                    <button
+                      onClick={() => dispatch(loadMoreUsers())}
+                      className="rounded-lg bg-gray-200 px-4 py-2 text-sm font-medium hover:bg-gray-300 transition"
+                    >
+                      Load More
+                    </button>
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+
+        {/* Modal */}
         {isModalOpen && (
           <UserModal
             close={() => {
               setIsModalOpen(false);
-              dispatch(clearSelectedUser())
+              dispatch(clearSelectedUser());
             }}
             onSubmit={selectedUser ? handleUpdate : handleAdd}
             editUser={selectedUser}

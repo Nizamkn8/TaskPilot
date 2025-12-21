@@ -211,5 +211,28 @@ Shows clean engineering.
 
 progress till now
 -----------------
-this is my project planning in this i have done adding,toggling,delting todo lists,implemented routing,todo operations using redux,used persist in redux to retain data when refresh,added copleted tasks,pending tasks,percentage of completed tasks pomodoro counter,total tasks these display in dashboard, implemented user crud functionality username,emal and user role its done using a modal and added pagination load more for users when user exceeds more than 5 and implemented it using redux now with persist, created debouncee search in users and tasks listing page with reusable custom Hook logic,implemented fetching users from  jsonplace holder and displayed it in ui and show the details of the members on modal when click show details button for each users,implemented user login and register and basic validations using local storage
+this is my project planning in this i have done adding,toggling,delting todo lists,implemented routing,todo operations using redux,used persist in redux to retain data when refresh,added copleted tasks,pending tasks,percentage of completed tasks pomodoro counter,total tasks these display in dashboard, implemented user crud functionality username,emal and user role its done using a modal and added pagination load more for users when user exceeds more than 5 and implemented it using redux now with persist, created debouncee search in users and tasks listing page with reusable custom Hook logic,implemented fetching users from  jsonplace holder and displayed it in ui and show the details of the members on modal when click show details button for each users,implemented user login and register and basic validations using local storage,implemented  dragging task items and changing the position using beautiful dnd library
  -->
+
+
+
+
+
+
+project explanation to incluew in resume
+----------------------------------------
+Productivity Dashboard (React, Redux Toolkit)
+
+Built a SaaS-style productivity dashboard with task management, user CRUD, and analytics.
+
+Implemented Redux Toolkit with Persist to manage tasks, users, and authentication state.
+
+Developed debounced search and pagination using reusable custom hooks.
+
+Added drag-and-drop task reordering using react-beautiful-dnd.
+
+Integrated REST APIs and displayed user details in modal-driven UI.
+
+Implemented role-based routing, protected routes, and localStorage-based auth.
+
+Focused on performance optimizations and scalable component architecture.

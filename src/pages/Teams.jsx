@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import UserDetailModal from '../components/common/UserDetailModal'
+import React, { useEffect, useState } from "react";
+import UserDetailModal from "../components/common/UserDetailModal";
 
 const Teams = () => {
-  const [teamMembers,setTeamMembers] = useState([])
-  const [loading,setLoading] = useState(true)
-  const [error,setError] = useState("")
-  const [selectedUser,setSelectedUser] = useState(null)
-  const [isModalOpen,setIsModalOpen] = useState(false)
+  const [teamMembers, setTeamMembers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     async function fetchUsers() {
@@ -23,42 +23,69 @@ const Teams = () => {
     }
 
     fetchUsers();
-  },[])
+  }, []);
 
   const handleModalClick = (user) => {
-    setSelectedUser(user)
-    setIsModalOpen(true)
-  }
+    setSelectedUser(user);
+    setIsModalOpen(true);
+  };
 
-  console.log(selectedUser);
+  if (loading)
+    return (
+      <div className="flex items-center justify-center h-[60vh] text-lg font-medium">
+        Loading team members...
+      </div>
+    );
 
-
-  if(loading) return <div>Loading....</div>
-  if(error) return <div>{error}</div>
+  if (error)
+    return (
+      <div className="text-red-600 text-center font-medium mt-10">
+        {error}
+      </div>
+    );
 
   return (
-    <div className='py-[80px] px-[40px]'>
-      <h1>Team Members</h1>
-      {teamMembers.map((user) => (
-        <div key={user.id} className='p-3 bg-amber-100 mb-3 text-black'>
-          <div >{user.name}</div>
-          <div>{user.email}</div>
-          <button onClick={() => handleModalClick(user)}>Show Details</button>
-        </div>
-      ))}
+    <div className="py-[80px] px-[40px] max-w-6xl mx-auto">
+      <h1 className="text-3xl font-bold mb-8 text-gray-800">
+        Team Members
+      </h1>
 
+      {/* Team Grid */}
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {teamMembers.map((user) => (
+          <div
+            key={user.id}
+            className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm hover:shadow-md transition"
+          >
+            <div className="mb-3">
+              <h2 className="text-lg font-semibold text-gray-800">
+                {user.name}
+              </h2>
+              <p className="text-sm text-gray-500">{user.email}</p>
+            </div>
+
+            <button
+              onClick={() => handleModalClick(user)}
+              className="mt-3 inline-flex items-center justify-center rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 transition"
+            >
+              Show Details
+            </button>
+          </div>
+        ))}
+      </div>
+
+      {/* Modal */}
       {isModalOpen && (
         <UserDetailModal
           userDetail={selectedUser}
           onClose={() => {
-            setIsModalOpen(false)
-            setSelectedUser(null)
+            setIsModalOpen(false);
+            setSelectedUser(null);
           }}
         />
       )}
-
     </div>
-  )
-}
+  );
+};
 
-export default Teams
+export default Teams;

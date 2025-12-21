@@ -28,32 +28,71 @@ const Login = () => {
   };
 
   return (
-    <div className="p-6 max-w-sm mx-auto">
-      <h2 className="text-2xl mb-4">Login</h2>
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+      <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-8">
 
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+        {/* Header */}
+        <div className="mb-6 text-center">
+          <h2 className="text-3xl font-bold text-gray-800">
+            Welcome Back
+          </h2>
+          <p className="text-sm text-gray-500 mt-1">
+            Please login to your account
+          </p>
+        </div>
 
-        <input
-          name="email"
-          type="email"
-          placeholder="Email"
-          className="border p-2"
-          onChange={handleChange}
-        />
+        {/* Form */}
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-600 mb-1">
+              Email
+            </label>
+            <input
+              name="email"
+              type="email"
+              placeholder="you@example.com"
+              value={form.email}
+              onChange={handleChange}
+              className="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm
+                         focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            />
+          </div>
 
-        <input
-          name="password"
-          type="password"
-          placeholder="Password"
-          className="border p-2"
-          onChange={handleChange}
-        />
+          <div>
+            <label className="block text-sm font-medium text-gray-600 mb-1">
+              Password
+            </label>
+            <input
+              name="password"
+              type="password"
+              placeholder="••••••••"
+              value={form.password}
+              onChange={handleChange}
+              className="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm
+                         focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            />
+          </div>
 
-        <button className="bg-blue-600 px-4 py-2 text-white">
-          Login
-        </button>
+          <button
+            type="submit"
+            className="w-full rounded-lg bg-blue-600 py-2.5 text-sm font-medium
+                       text-white hover:bg-blue-700 transition"
+          >
+            Login
+          </button>
+        </form>
 
-      </form>
+        {/* Footer */}
+        <div className="mt-6 text-center text-sm text-gray-500">
+          Don’t have an account?{" "}
+          <span
+            onClick={() => navigate("/register")}
+            className="cursor-pointer font-medium text-blue-600 hover:underline"
+          >
+            Register
+          </span>
+        </div>
+      </div>
     </div>
   );
 };

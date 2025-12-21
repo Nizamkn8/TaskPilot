@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 
 const AddTaskForm = ({ onAdd }) => {
   const [title,setTitle] = useState("");
-  console.log(title);
 
 
   const handleSubmit = (e) => {
@@ -23,7 +22,9 @@ const AddTaskForm = ({ onAdd }) => {
           onChange={(e) => setTitle(e.target.value) }
         />
 
-        <button type='submit'>
+        <button
+          className='inline-flex items-center rounded-lg border border-gray-300 px-5 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-100 transition'
+          type='submit'>
           Submit
         </button>
       </form>
