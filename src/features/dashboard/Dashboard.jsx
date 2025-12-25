@@ -47,7 +47,7 @@ const Dashboard = () => {
 
 const Stat = ({ label, value, color = "text-gray-800" }) => (
   <div className="rounded-2xl bg-white p-5 shadow-sm border border-gray-200">
-    <p className="text-sm text-gray-500 mb-1">{label}</p>
+    <p className="text-sm text-gray-500 mb-1">{label}hii</p>
     <p className={`text-3xl font-bold ${color}`}>{value}</p>
   </div>
 );
